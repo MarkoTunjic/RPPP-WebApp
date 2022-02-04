@@ -1,0 +1,60 @@
+﻿@model RadniList
+
+<form asp-route-page="@ViewBag.Page"
+      asp-route-sort="@ViewBag.Sort"
+      asp-route-ascending="@ViewBag.Ascending"
+      method="post">
+    <div asp-validation-summary="All"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="IdRadniNalog"></label>
+        <div><span asp-validation-for="IdRadniNalog" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdRadniNalog" asp-items="ViewBag.RadniNalozi">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="PocetakRada"></label>
+        <div><span asp-validation-for="PocetakRada" class="text-danger"></span></div>
+        <input asp-for="PocetakRada" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TrajanjeRada"></label>
+        <div><span asp-validation-for="TrajanjeRada" class="text-danger"></span></div>
+        <input asp-for="TrajanjeRada" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OpisRada"></label>
+        <div><span asp-validation-for="OpisRada" class="text-danger"></span></div>
+        <input asp-for="OpisRada" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IdUredaj"></label>
+        <div><span asp-validation-for="IdUredaj" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdUredaj" asp-items="ViewBag.Uredaji">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdTimZaOdrzavanje"></label>
+        <div><span asp-validation-for="IdTimZaOdrzavanje" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdTimZaOdrzavanje" asp-items="ViewBag.Timovi">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdStatus"></label>
+        <div><span asp-validation-for="IdStatus" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdStatus" asp-items="ViewBag.Statusi">
+        </select>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Spremi</button>
+        <a asp-action="Index"
+           asp-route-page="@ViewBag.Page"
+           asp-route-sort="@ViewBag.Sort"
+           asp-route-ascending="@ViewBag.Ascending"
+           class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

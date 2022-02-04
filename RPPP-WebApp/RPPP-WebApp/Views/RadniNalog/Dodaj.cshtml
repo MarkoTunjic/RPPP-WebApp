@@ -1,0 +1,96 @@
+﻿@model RadniNalogViewModel
+
+<h2>Unos novog radnog naloga</h2>
+
+<div class="container">
+    <form asp-action="Dodaj" method="post" id="dokument_form">
+        <div asp-validation-summary="All" class="form-group row"></div>
+
+        <div class="form-group row">
+            <label asp-for="Sla" class=" col-form-label"></label>
+            <div class="">
+                <input asp-for="Sla" class="form-control" />
+            </div>
+            <label asp-for="Trajanje" class="col-sm-1 col-form-label"></label>
+            <div class="">
+                <input asp-for="Trajanje" class="form-control" />
+            </div>
+            <label asp-for="PocetakRada" class="col-sm-1 col-form-label"></label>
+            <div class="">
+                <input asp-for="PocetakRada" class="form-control" />
+            </div>
+
+            <label asp-for="IdStatus" class="col-form-label"></label>
+            <div class="">
+                <input asp-for="IdStatus" readonly="readonly" class="form-control" data-autocomplete-placeholder="Status" />
+            </div>
+            <div class="">
+                <input class="form-control" data-autocomplete="Status" asp-for="@Model.Status" />
+            </div>
+
+            <label asp-for="IdStupanjPrioriteta" class="col-form-label"></label>
+            <div class="">
+                <input asp-for="IdStupanjPrioriteta" readonly="readonly" class="form-control" data-autocomplete-placeholder="Prioritet" />
+            </div>
+            <div class="">
+                <input class="form-control" data-autocomplete="Prioritet" asp-for="@Model.StupanjPrioriteta" />
+            </div>
+
+            <label asp-for="IdKontrolor" class="col-form-label"></label>
+            <div class="">
+                <input asp-for="IdKontrolor" readonly="readonly" class="form-control" data-autocomplete-placeholder="Kontrolor" />
+            </div>
+            <div class="">
+                <input class="form-control" data-autocomplete="Kontrolor" asp-for="@Model.Kontrolor" />
+            </div>
+
+            <label asp-for="IdLokacija" class="col-form-label"></label>
+            <div class="">
+                <input asp-for="IdLokacija" readonly="readonly" class="form-control" data-autocomplete-placeholder="Lokacija" />
+            </div>
+            <div class="">
+                <input class="form-control" data-autocomplete="Lokacija" asp-for="@Model.Lokacija" />
+            </div>
+
+            <label asp-for="IdKvar" class="col-form-label"></label>
+            <div class="">
+                <input asp-for="IdKvar" readonly="readonly" class="form-control" data-autocomplete-placeholder="Kvar" />
+            </div>
+            <div class="">
+                <input class="form-control" data-autocomplete="Kvar" asp-for="@Model.Kvar" />
+            </div>
+
+            <label asp-for="TipRada" class=" col-form-label"></label>
+            <div class="">
+                <input asp-for="TipRada" class="form-control" />
+            </div>
+
+            <label asp-for="TragKvara" class=" col-form-label"></label>
+            <div class="">
+                <input asp-for="TragKvara" class="form-control" />
+            </div>
+            <div class="">
+                <button id="save" type="submit" class="btn btn-sm btn-primary" title="Spremi">Spremi</button>
+                <a class="btn btn-sm btn-primary" value="Odustani" asp-action="Index" title="Odustani">
+                    Odustani
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <partial name="RadniListovi" model="Model.RadniListovi" />
+        </div>
+    </form>
+</div>
+
+<partial name="NoviRadniListTemplate" />
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+    <partial name="IncludeValidation" />
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/autocomplete.js" asp-append-version="true"></script>
+    <script src="~/js/RadniNalozi.js" asp-append-version="true"></script>
+}

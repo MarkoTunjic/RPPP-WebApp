@@ -1,0 +1,26 @@
+﻿<ul>
+    <li>
+        <a target="_blank" asp-action="RadniNalozi">Popis svih radnih naloga i njihovih radnih listova</a>
+    </li>
+    <li>
+        <a target="_blank" asp-action="RadniListoviExcel">Popis svih radnih listova i njihovih statusa u xlsx</a>
+    </li>
+    <li>
+        <a target="_blank" asp-action="RadniNaloziExcel">Popis svih radnih naloza u xlsx</a>
+    </li>
+</ul>
+
+<div id="upload row">
+    <form class="form-inline" asp-action="ImportExcel" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="form-group col-xs-6 col-md-3 ">
+                <label for="importFile">Uvoz podataka u excel formatu za radne listove i statuse</label>
+                <input type="file" class="form-control" id="importFile" name="importFile" data-save="">
+            </div>
+            <div class="form-group">
+                <label for="submit"></label>
+                <input type="submit" id="submit" value="Uvezi">
+            </div>
+        </div>
+    </form>
+</div>

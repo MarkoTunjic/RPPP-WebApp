@@ -1,0 +1,105 @@
+﻿@model LogsViewModel
+
+<div class="container mt-3">
+	<div class="jumbotron">
+		<h1>Logovi</h1>
+		<p>
+			Na ovoj stranici je moguće pregledati sve logove
+		</p>
+	</div>
+</div>
+
+<div class="container col-sm-12 col-lg-8">
+	@if (Model != null)
+	{
+		<table class="table table-hover" id="planTable">
+			<caption>Područja rada</caption>
+			<thead>
+				<tr>
+					<th scope="col">
+						<a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+							Datum unosa u bazu
+						</a>
+					</th>
+					<th scope="col">
+						<a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+							Datum logiranja
+						</a>
+					</th>
+					<th scope="col">
+						<a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+							Razina logiranja
+						</a>
+					</th>
+					<th scope="col">
+						<a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">
+							Klasa koja je logirala
+						</a>
+					</th>
+					<th scope="col">
+						<a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending : true)">
+							Poruka
+						</a>
+					</th>
+					<th scope="col">
+						<a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending : true)">
+							Greska
+						</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (LogViewModel log in @Model.Logs)
+				{
+					<tr>
+						<td>@log.EnteredDate</td>
+						<td>@log.LogDate</td>
+						<td>@log.LogLevel</td>
+						<td>@log.LogLogger</td>
+						<td>@log.LogMessage</td>
+						@if (log.LogException == null || string.IsNullOrEmpty(log.LogException))
+						{
+							<td>Nema</td>
+						}
+						else
+						{
+							<td>@log.LogException</td>
+						}
+
+					</tr>
+				}
+			</tbody>
+		</table>
+		<div class="btn-group paginator" role="group" aria-label="Basic example">
+			@{
+				int usedLeft = Model.PagingInfo.CurrentPage - Model.PagingInfo.PageOffset > 0 ? Model.PagingInfo.PageOffset : Model.PagingInfo.CurrentPage - 1;
+				int usedRight = Model.PagingInfo.PageOffset + Model.PagingInfo.CurrentPage < Model.PagingInfo.TotalPages ? Model.PagingInfo.PageOffset : Model.PagingInfo.TotalPages - Model.PagingInfo.CurrentPage;
+
+				int start = Model.PagingInfo.CurrentPage - usedLeft - (Model.PagingInfo.PageOffset - usedRight);
+				int end = Model.PagingInfo.CurrentPage + usedRight + (Model.PagingInfo.PageOffset - usedLeft);
+				end = end > Model.PagingInfo.TotalPages ? Model.PagingInfo.TotalPages : end;
+				start = start < 1 ? 1 : start;
+				if (start >= 2)
+				{
+					<a class="btn btn-outline-success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="1" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">1</a>
+					@if (start > 2)
+					{
+						<a class="btn btn-outline-success btn-sm pager disabled" role="button">...</a>
+					}
+				}
+			}
+			@for (int currentPage = start; currentPage <= end; currentPage++)
+			{
+				<a class="btn btn-@(currentPage == Model.PagingInfo.CurrentPage ? "": "outline-")success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="@currentPage" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">@currentPage</a>
+			}
+			@if (end <= Model.PagingInfo.TotalPages - 1)
+			{
+				@if (end < Model.PagingInfo.TotalPages - 1)
+				{
+					<a class="btn btn-outline-success btn-sm pager disabled" role="button">...</a>
+				}
+				<a class="btn btn-outline-success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="@Model.PagingInfo.TotalPages" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">@Model.PagingInfo.TotalPages</a>
+			}
+		</div>
+	}
+</div>

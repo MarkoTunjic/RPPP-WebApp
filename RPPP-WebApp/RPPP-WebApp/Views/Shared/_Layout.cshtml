@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+
+	<title>@(ViewBag.Title != null ? ViewBag.Title : "RPPP Homework")</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	@RenderSection("styles", required: false)
+</head>
+<body>
+	<partial name="_Nav" />
+	<div>
+		<partial name="ShowMessage" />
+	</div>
+	<div class="container body-container">
+		@RenderBody()
+	</div>
+
+	<partial name="_Footer" />
+	<script src="~/lib/jquery/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@RenderSection("scripts", required: false)
+</body>
+</html>

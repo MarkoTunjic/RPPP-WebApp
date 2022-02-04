@@ -1,0 +1,20 @@
+﻿@model Status
+
+<h2>Unos novog statusa radnog naloga</h2>
+
+<form asp-action="Dodaj" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="NazivStatusa"></label>
+        <div><span asp-validation-for="NazivStatusa" class="text-danger"></span></div>
+        <input asp-for="NazivStatusa" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-default">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

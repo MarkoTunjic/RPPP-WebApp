@@ -1,0 +1,92 @@
+﻿@model IEnumerable<KontrolorViewModel>
+<table class="table table-striped" id="table-kontrolori">
+	<thead>
+		<tr>
+			@{
+				string[] nazivi = { "Rang", "Ime", "Prezime", "Oib", "Pocetak smjene", "Datum zaposlenja", "Zaposlen do", "Korisničko ime", "Lozinka" };
+				for (int i = 0; i < nazivi.Length; i++)
+				{
+					<th class="text-center">
+						@nazivi[i]
+					</th>
+				}
+			}
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var kontrolor in Model)
+		{
+			<tr>
+				<td class="text-left col-sm-4">
+					<input type="hidden" name="Kontrolori.Index" value="@kontrolor.IdRang" />
+					<input type="hidden" name="Kontrolori[@kontrolor.IdRang].Id" value="@kontrolor.Id" />
+					<input type="hidden" name="Kontrolori[@kontrolor.IdRang].IdRang" value="@kontrolor.IdRang" />
+					<input type="hidden" name="Kontrolori[@kontrolor.IdRang].ImeRanga" value="@kontrolor.ImeRanga" />
+					@kontrolor.ImeRanga
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Kontrolori[@kontrolor.IdRang].Ime" class="form-control" value="@kontrolor.Ime" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Kontrolori[@kontrolor.IdRang].Prezime" class="form-control" value="@kontrolor.Prezime" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Kontrolori[@kontrolor.IdRang].Oib" class="form-control" value="@kontrolor.Oib" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input type="text" name="Kontrolori[@kontrolor.IdRang].PocetakSmjene" class="form-control" value="@kontrolor.PocetakSmjene" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Kontrolori[@kontrolor.IdRang].DatumZaposlenja" type="datetime" class="form-control" value="@kontrolor.DatumZaposlenja" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Kontrolori[@kontrolor.IdRang].ZaposlenDo" type="datetime" class="form-control" value="@kontrolor.ZaposlenDo" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Kontrolori[@kontrolor.IdRang].KorisnickoIme" class="form-control" value="@kontrolor.KorisnickoIme" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Kontrolori[@kontrolor.IdRang].Lozinka" class="form-control" value="@kontrolor.Lozinka" />
+				</td>
+				<td>
+					<button class="btn btn-sm btn-danger deleterow" title="Izbaci">Obrisi</button>
+				</td>
+			</tr>
+		}
+		<tr>
+			<td>
+				<input id="kontrolor-idRang" type="hidden" data-autocomplete-placeholder="Rang" readonly="readonly" />
+				<input id="kontrolor-imeRanga" type="text" data-autocomplete="Rang" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="kontrolor-ime" type="text" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="kontrolor-prezime" type="text" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="kontrolor-oib" type="text" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="kontrolor-pocetakSmjene" type="text" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="kontrolor-datumZaposlenja" type="datetime" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="kontrolor-zaposlenDo" type="datetime" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="kontrolor-korisnickoIme" type="text" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="kontrolor-lozinka" type="text" />
+			</td>
+			<td class="text-left" colspan="3">
+				<button id="kontrolor-dodaj" class="btn btn-sm btn-secondary" title="Dodaj">Dodaj</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+

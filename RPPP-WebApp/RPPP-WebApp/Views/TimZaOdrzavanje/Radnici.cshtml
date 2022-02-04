@@ -1,0 +1,74 @@
+﻿@model IEnumerable<RadnikViewModel>
+<table class="table table-striped" id="table-radnici">
+	<thead>
+		<tr>
+			@{
+				string[] nazivi = { "Strucna sprema", "Ime", "Prezime", "Certifikat", "Istek certifikata", "Dezuran [0,1]" };
+				for (int i = 0; i < nazivi.Length; i++)
+				{
+					<th class="text-center">
+						@nazivi[i]
+					</th>
+				}
+			}
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var radnik in Model)
+		{
+			<tr>
+				<td class="text-left col-sm-4">
+					<input type="hidden" name="Radnici.Index" value="@radnik.IdStrucnaSprema" />
+					<input type="hidden" name="Radnici[@radnik.IdStrucnaSprema].Id" value="@radnik.Id" />
+					<input type="hidden" name="Radnici[@radnik.IdStrucnaSprema].IdStrucnaSprema" value="@radnik.IdStrucnaSprema" />
+					<input type="hidden" name="Radnici[@radnik.IdStrucnaSprema].RazinaStrucneSpreme" value="@radnik.RazinaStrucneSpreme" />
+					@radnik.RazinaStrucneSpreme
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Radnici[@radnik.IdStrucnaSprema].Ime" class="form-control" value="@radnik.Ime" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Radnici[@radnik.IdStrucnaSprema].Prezime" class="form-control" value="@radnik.Prezime" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Radnici[@radnik.IdStrucnaSprema].Certifikat" class="form-control" value="@radnik.Certifikat" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Radnici[@radnik.IdStrucnaSprema].IstekCertifikata" type="datetime" class="form-control" value="@radnik.IstekCertifikata" />
+				</td>
+				<td class="text-center col-sm-1">
+					<input name="Radnici[@radnik.IdStrucnaSprema].Dezuran" class="form-control" value="@radnik.Dezuran" />
+				</td>
+				<td>
+					<button class="btn btn-sm btn-danger deleterow" title="Izbaci">Obrisi</button>
+				</td>
+			</tr>
+		}
+		<tr>
+			<td>
+				<input id="radnik-idStrucnaSprema" type="hidden" data-autocomplete-placeholder="StrucnaSprema" readonly="readonly" />
+				<input id="radnik-strucnaSprema" type="text" data-autocomplete="StrucnaSprema" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="radnik-ime" type="text" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="radnik-prezime" type="text" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="radnik-certifikat" type="text" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="radnik-istekCertifikata" type="datetime" />
+			</td>
+			<td class="text-center col-sm-1">
+				<input id="radnik-dezuran" type="number" />
+			</td>
+			<td class="text-left" colspan="3">
+				<button id="radnik-dodaj" class="btn btn-sm btn-secondary" title="Dodaj">Dodaj</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+

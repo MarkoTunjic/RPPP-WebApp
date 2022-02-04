@@ -1,0 +1,146 @@
+﻿@model OpremaListViewModel
+<p class="small">
+    Straničenje i sortiranje (server)
+</p>
+
+<div class="container mt-3">
+    <div class="jumbotron">
+        <h1>Oprema</h1>
+        <p>
+            Na ovoj stranici je moguće pregledati opremu i njene uređaje ili <a asp-action="Dodaj">dodati</a>
+        </p>
+    </div>
+</div>
+
+<div class="container col-sm-12 col-lg-8">
+    @if (@Model != null)
+    {
+        <table class="table table-hover" id="planTable">
+            <caption>Oprema</caption>
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <a asp-route-sort="1"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">Redundantnost</a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="2"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">Budžet</a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="3"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">Datum puštanja u pogon</a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="4"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">Tip opreme</a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="5"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending : true)">Naziv podsustava</a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="6"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending : true)">Uređaji</a>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (OpremaViewModel oprema in @Model.OpremaList)
+                {
+                    <tr>
+                        <th scope="row">@oprema.Redundantnost</th>
+                        <td>@oprema.Budzet</td>
+                        <td>@oprema.DatumPustanjaUPogon</td>
+                        <td>@oprema.TipOpreme</td>
+                        <td>@oprema.PodsustavNaziv</td>
+                        <td>
+                            @{
+                                int counter;
+                                int max = oprema.Uredaji.Count < 3 ? oprema.Uredaji.Count : 3;
+                                for (counter = 0; counter < max; counter++)
+                                {
+                                    if (counter < oprema.Uredaji.Count - 1)
+                                    {
+                                        <span>@oprema.Uredaji.ElementAt(counter).Naziv,</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@oprema.Uredaji.ElementAt(counter).Naziv</span>
+                                    }
+                                }
+                                if (oprema.Uredaji.Count > 3)
+                                {
+                                    <span>...</span>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a class="btn btn-primary btn-sm mr-2" role="button"
+                                   asp-action="Detalji"
+                                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                                   asp-route.sort="@Model.PagingInfo.Sort"
+                                   asp-route-ascending="@Model.PagingInfo.Ascending"
+                                   asp-route-id="@oprema.Id">Detalji</a>
+                                <a class="btn btn-warning btn-sm mr-2" role="button"
+                                   asp-action="Uredi"
+                                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                                   asp-route-sort="@Model.PagingInfo.Sort"
+                                   asp-route-ascending="@Model.PagingInfo.Ascending"
+                                   asp-route-id="@oprema.Id">
+                                    Uredi
+                                </a>
+                                <form asp-action="Obrisi" method="post"
+                                      asp-route-page="@Model.PagingInfo.CurrentPage"
+                                      asp-route-sort="@Model.PagingInfo.Sort"
+                                      asp-route-ascending="@Model.PagingInfo.Ascending">
+                                    <input type="hidden" name="Id" value="@oprema.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">Obriši</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+        <div class="btn-group paginator" role="group" aria-label="Basic example">
+            @{
+                int usedLeft = Model.PagingInfo.CurrentPage - Model.PagingInfo.PageOffset > 0 ? Model.PagingInfo.PageOffset : Model.PagingInfo.CurrentPage - 1;
+                int usedRight = Model.PagingInfo.PageOffset + Model.PagingInfo.CurrentPage < Model.PagingInfo.TotalPages ? Model.PagingInfo.PageOffset : Model.PagingInfo.TotalPages - Model.PagingInfo.CurrentPage;
+
+                int start = Model.PagingInfo.CurrentPage - usedLeft - (Model.PagingInfo.PageOffset - usedRight);
+                int end = Model.PagingInfo.CurrentPage + usedRight + (Model.PagingInfo.PageOffset - usedLeft);
+                end = end > Model.PagingInfo.TotalPages ? Model.PagingInfo.TotalPages : end;
+                start = start < 1 ? 1 : start;
+                if (start >= 2)
+                {
+                    <a class="btn btn-outline-success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="1" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">1</a>
+                    @if (start > 2)
+                    {
+                        <a class="btn btn-outline-success btn-sm pager disabled" role="button">...</a>
+                    }
+                }
+            }
+            @for (int currentPage = start; currentPage <= end; currentPage++)
+            {
+                <a class="btn btn-@(currentPage == Model.PagingInfo.CurrentPage ? "" : "outline-")success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="@currentPage" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">@currentPage</a>
+            }
+            @if (end <= Model.PagingInfo.TotalPages - 1)
+            {
+                @if (end < Model.PagingInfo.TotalPages - 1)
+                {
+                    <a class="btn btn-outline-success btn-sm pager disabled" role="button">...</a>
+                }
+                <a class="btn btn-outline-success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="@Model.PagingInfo.TotalPages" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">@Model.PagingInfo.TotalPages</a>
+            }
+        </div>
+     }
+    </div>

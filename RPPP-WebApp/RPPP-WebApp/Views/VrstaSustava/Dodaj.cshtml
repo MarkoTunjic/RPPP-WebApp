@@ -1,0 +1,17 @@
+﻿@model VrstaSustava
+
+<h2>Unesite novu vrstu sustava</h2>
+
+<form asp-action="Dodaj" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="NazivVrsteSustava"></label>
+        <div><span asp-validation-for="NazivVrsteSustava" class="text-danger"></span></div>
+        <input asp-for="NazivVrsteSustava" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-default">Odustani</a>
+    </div>
+
+</form>

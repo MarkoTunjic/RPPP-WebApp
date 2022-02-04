@@ -1,0 +1,101 @@
+﻿@model RadniNalogViewModel
+<a class="btn btn-warning"
+   asp-action="Index"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending">Povratak</a>
+<a class="btn btn-primary" asp-action="Prethodni"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">Prethodni</a>
+<a class="btn btn-primary" asp-action="Sljedeci"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">Sljedeći</a>
+
+<form>
+    <div class="form-group">
+        <label asp-for="Kvar"></label>
+        <input asp-for="Kvar" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Lokacija"></label>
+        <input asp-for="Lokacija" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input asp-for="Status" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="StupanjPrioriteta"></label>
+        <input asp-for="StupanjPrioriteta" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="PocetakRada"></label>
+        <input asp-for="PocetakRada" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Sla"></label>
+        <input asp-for="Sla" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="TipRada"></label>
+        <input asp-for="TipRada" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="TragKvara"></label>
+        <input asp-for="TragKvara" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Trajanje"></label>
+        <input asp-for="Trajanje" class="form-control" readonly />
+    </div>
+</form>
+
+<div class="container col-sm-12 col-lg-8">
+    <table class="table table-hover" id="planTable">
+        <caption>Radni listovi</caption>
+        <thead>
+            <tr>
+                <th scope="col">
+                    Naziv dodijeljenog tima
+                </th>
+                <th scope="col">
+                    Status
+                </th>
+                <th scope="col">
+                    Naziv povezanog uređaja
+                </th>
+                <th scope="col">
+                    Početak rada
+                </th>
+                <th scope="col">
+                    Trajanje
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (RadniListViewModel radniList in Model.RadniListovi)
+            {
+                <tr>
+                    <th scope="row">@radniList.TimZaOdrzavanje</th>
+                    <td>@radniList.Status</td>
+                    <td>@radniList.NazivUredaja</td>
+                    <td>@radniList.PocetakRada</td>
+
+                    @if (radniList.TrajanjeRada == null)
+                    {
+                        <td>Izvodi se</td>
+                    }
+                    else
+                    {
+                        <td>@radniList.TrajanjeRada</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

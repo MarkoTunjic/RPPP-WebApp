@@ -1,0 +1,87 @@
+﻿@model PodrucjeRadaViewModel
+
+<div class="container mt-3">
+	<div class="jumbotron">
+		<h1>Podrucje rada</h1>
+		<p>
+			Na ovoj stranici je moguće pregledati, urediti, obrisati ili <a asp-action="Dodaj">dodati</a> moguća područja rada
+		</p>
+		<small>(Ažuriranje,dodavanje, brisanje,sortiranje i straničenje na serveru, popup dijalog, obrada iznimki, validacija)</small>
+	</div>
+</div>
+
+<div class="container col-sm-12 col-lg-8">
+	@if (Model != null)
+	{
+		<table class="table table-hover" id="planTable">
+			<caption>Područja rada</caption>
+			<thead>
+				<tr>
+					<th scope="col">
+						<a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+							Naziv područja
+						</a>
+					</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (PodrucjeRada podrucje in @Model.Podrucja)
+				{
+					<tr>
+						<th scope="row">@podrucje.VrstaPodrucjaRada</th>
+						<td>
+							<div class="btn-group" role="group" aria-label="Basic example">
+								<a class="btn btn-warning btn-sm mr-2" role="button" asp-action="Uredi"
+						   asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-sort="@Model.PagingInfo.Sort"
+						   asp-route-ascending="@Model.PagingInfo.Ascending" asp-route-id="@podrucje.Id">
+									Uredi
+								</a>
+							</div>
+							<div class="btn-group" role="group" aria-label="Basic example">
+								<form asp-action="Obrisi" method="post"
+							  asp-route-page="@Model.PagingInfo.CurrentPage"
+							  asp-route-sort="@Model.PagingInfo.Sort"
+							  asp-route-ascending="@Model.PagingInfo.Ascending">
+									<input type="hidden" name="id" value="@podrucje.Id" />
+									<button type="submit" class="btn btn-danger btn-sm delete">Obriši</button>
+								</form>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<div class="btn-group paginator" role="group" aria-label="Basic example">
+			@{
+				int usedLeft = Model.PagingInfo.CurrentPage - Model.PagingInfo.PageOffset > 0 ? Model.PagingInfo.PageOffset : Model.PagingInfo.CurrentPage - 1;
+				int usedRight = Model.PagingInfo.PageOffset + Model.PagingInfo.CurrentPage < Model.PagingInfo.TotalPages ? Model.PagingInfo.PageOffset : Model.PagingInfo.TotalPages - Model.PagingInfo.CurrentPage;
+
+				int start = Model.PagingInfo.CurrentPage - usedLeft - (Model.PagingInfo.PageOffset - usedRight);
+				int end = Model.PagingInfo.CurrentPage + usedRight + (Model.PagingInfo.PageOffset - usedLeft);
+				end = end > Model.PagingInfo.TotalPages ? Model.PagingInfo.TotalPages : end;
+				start = start < 1 ? 1 : start;
+				if (start >= 2)
+				{
+					<a class="btn btn-outline-success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="1" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">1</a>
+					@if (start > 2)
+					{
+						<a class="btn btn-outline-success btn-sm pager disabled" role="button">...</a>
+					}
+				}
+			}
+			@for (int currentPage = start; currentPage <= end; currentPage++)
+			{
+				<a class="btn btn-@(currentPage == Model.PagingInfo.CurrentPage ? "": "outline-")success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="@currentPage" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">@currentPage</a>
+			}
+			@if (end <= Model.PagingInfo.TotalPages - 1)
+			{
+				@if (end < Model.PagingInfo.TotalPages - 1)
+				{
+					<a class="btn btn-outline-success btn-sm pager disabled" role="button">...</a>
+				}
+				<a class="btn btn-outline-success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="@Model.PagingInfo.TotalPages" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">@Model.PagingInfo.TotalPages</a>
+			}
+		</div>
+	}
+</div>

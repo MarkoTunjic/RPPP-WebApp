@@ -1,0 +1,75 @@
+﻿@model SmjenaViewModel
+
+<h2>Uređivanje smjene</h2>
+<a class="btn btn-warning"
+   asp-action="Index"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending">Povratak</a>
+<a class="btn btn-primary" asp-action="Prethodni"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id"
+   asp-route-viewName="Uredi">prethodni</a>
+<a class="btn btn-primary" asp-action="Sljedeci"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id"
+   asp-route-viewName="Uredi">sljedeći</a>
+<div class="container">
+	<form asp-action="Uredi"
+		  asp-route-page="@ViewBag.Page"
+		  asp-route-sort="@ViewBag.Sort"
+		  asp-route-ascending="@ViewBag.Ascending"
+		  method="post" id="dokument_form">
+		<input type="hidden" asp-for="Id" />
+		<div asp-validation-summary="All" class="form-group row"></div>
+		<div class="form-group row">
+			<label asp-for="PocetakSmjene" class=" col-form-label"></label>
+			<div class="">
+				<input asp-for="PocetakSmjene" class="form-control" />
+			</div>
+			<label asp-for="PlatniFaktor" class="col-sm-1 col-form-label"></label>
+			<div class="">
+				<input asp-for="PlatniFaktor" class="form-control" />
+			</div>
+			<label asp-for="IdKrajSmjene" class="col-form-label"></label>
+			<div class="">
+				<input asp-for="IdKrajSmjene" readonly="readonly" class="form-control" data-autocomplete-placeholder="krajSmjene" />
+			</div>
+			<div class="">
+				<input class="form-control" data-autocomplete="krajSmjene" asp-for="@Model.VrijemeKrajaSmjene" />
+			</div>
+			<div class="">
+				<button id="save" type="submit" class="btn btn-sm btn-primary" title="Spremi">Spremi</button>
+				<a class="btn btn-sm btn-primary cancel"
+				   asp-action="Uredi"
+				   asp-route-id="@Model.Id"
+				   asp-route-page="@ViewBag.Page"
+				   asp-route-sort="@ViewBag.Sort"
+				   asp-route-ascending="@ViewBag.Ascending"
+				   title="Osvježi">
+					Osvježi</i>
+				</a>
+			</div>
+		</div>
+		<div class="col-sm-10">
+			<partial name="Kontrolori" model="Model.Kontrolori" />
+		</div>
+	</form>
+</div>
+
+<partial name="NoviKontrolorTemplate" />
+
+@section styles{
+<link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+<partial name="IncludeValidation" />
+<script src="~/lib/jqueryui/jquery-ui.js"></script>
+<script src="~/js/autocomplete.js" asp-append-version="true"></script>
+<script src="~/js/Smjene.js" asp-append-version="true"></script>
+}

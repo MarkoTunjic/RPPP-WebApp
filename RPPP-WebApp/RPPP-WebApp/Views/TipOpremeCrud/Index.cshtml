@@ -1,0 +1,66 @@
+﻿<h1>Dohvati tipove opreme</h1>
+<input type="hidden" id="controller" value="Tip" />
+<input type="hidden" id="naziv" value="TipOpreme" />
+<div class="form-group">
+    <label for="start">Početni index</label>
+    <input class="form-control" type="number" id="start" placeholder="Unesite početni index" />
+    <label for="size">Broj podataka koje želite</label>
+    <input class="form-control" type="number" id="size" placeholder="Unesite broj podataka koje želite" />
+    <label for="sort">Attribut za sortiranje (Id,TipOpreme)</label>
+    <input class="form-control" type="text" id="sort" placeholder="Unesite attribut za sortiranje (Id,TipOpreme)" />
+    <input type="button" id="dohvatiTipoveOpreme" value="dohvati" />
+    <label class="form-control" for="tipoviOpreme">Rezultat:</label>
+    <textarea class="form-control" id="tipoviOpreme"></textarea>
+</div>
+
+<h1>Dohvati tipove opreme po id-u</h1>
+<div class="form-group">
+    <label for="id">Id koji želite dohvatiti</label>
+    <input class="form-control" type="number" id="id" placeholder="Unesite id" />
+    <input type="button" id="dohvatiTipOpreme" value="dohvati" />
+    <label class="form-control" for="tipOpreme">Rezultat:</label>
+    <textarea class="form-control" id="tipOpreme"></textarea>
+</div>
+
+<h1>Dohvati broj tipova opreme koji sadrže string</h1>
+<div class="form-group">
+    <label for="filter">String za filter</label>
+    <input class="form-control" type="text" id="filter" placeholder="Unesite string filter" />
+    <input type="button" id="dohvatiFiltrirano" value="dohvati" />
+    <label class="form-control" for="broj">Rezultat:</label>
+    <textarea class="form-control" id="broj"></textarea>
+</div>
+
+<h1>Brisanje područja po id-u</h1>
+<div class="form-group">
+    <label for="brisanje">Id za brisanje</label>
+    <input class="form-control" type="number" id="brisanje" placeholder="Unesite id za brisanje" />
+    <input type="button" id="obrisi" value="obrisi" />
+    <label class="form-control" for="obrisano">Rezultat:</label>
+    <textarea class="form-control" id="obrisano"></textarea>
+</div>
+
+<h1>Uređivanje područja po id-u</h1>
+<small>Prvo unesite id i pojavit će se trenutni naziv koji možete urediti. Ako se ne pojavi probajte kliknuti sa strane</small>
+<form id="uredivanje">
+    <label for="urediId">Id tipa stanja koje želite urediti</label>
+    <input class="form-control" id="urediId" name="Id" type="number" placeholder="Unesite Id tipa stanja koje želite urediti" />
+    <label for="tip">Tip stanja</label>
+    <input class="form-control" id="noviTip" name="TipOpreme" type="text" placeholder="Unesite tip" />
+    <input type="button" id="uredi" value="uredi" />
+    <label class="form-control" for="uredeno">Rezultat:</label>
+    <textarea class="form-control" id="uredeno"></textarea>
+</form>
+
+<h1>Novi tip stanja</h1>
+<form id="dodavanje">
+    <label for="naziv">Naziv novog tipa stanja</label>
+    <input class="form-control" id="tip" name="TipOpreme" type="text" placeholder="Unesite tip stanja" />
+    <input type="button" id="dodaj" value="dodaj" />
+    <label class="form-control" for="dodano">Rezultat:</label>
+    <textarea class="form-control" id="dodano"></textarea>
+</form>
+@section scripts{
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/Crud.js" asp-append-version="true"></script>
+}

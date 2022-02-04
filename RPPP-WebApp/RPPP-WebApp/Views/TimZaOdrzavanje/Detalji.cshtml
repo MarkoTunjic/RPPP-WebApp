@@ -1,0 +1,106 @@
+﻿@model TimZaOdrzavanjeViewModel
+<a class="btn btn-warning"
+   asp-action="Index"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending">Povratak</a>
+<a class="btn btn-primary" asp-action="Prethodni"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">prethodni</a>
+<a class="btn btn-primary" asp-action="Sljedeci"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">sljedeći</a>
+
+<form>
+	<div class="form-group">
+		<label asp-for="NazivTima"></label>
+		<input asp-for="NazivTima" class="form-control" readonly />
+	</div>
+	<div class="form-group">
+		<label asp-for="DatumOsnivanja"></label>
+		<input asp-for="DatumOsnivanja" class="form-control" readonly />
+	</div>
+	<div class="form-group">
+		<label asp-for="VrstaPodrucjaRada"></label>
+		<input asp-for="VrstaPodrucjaRada" class="form-control" readonly />
+	</div>
+	<div class="form-group">
+		<label asp-for="Satnica"></label>
+		<input asp-for="Satnica" class="form-control" readonly />
+	</div>
+</form>
+
+<div class="container col-sm-12 col-lg-8">
+	@if (Model != null)
+	{
+		<table class="table table-hover" id="planTable">
+			<caption>Radnici</caption>
+			<thead>
+				<tr>
+					<th scope="col">
+						Ime
+					</th>
+					<th scope="col">
+						Prezime
+					</th>
+					<th scope="col">
+						Strucna sprema
+					</th>
+					<th scope="col">
+						Certifikat
+					</th>
+					<th scope="col">
+						Istek certifikata
+					</th>
+					<th scope="col">
+						Dezuran(da/ne)
+					</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (RadnikViewModel radnik in Model.Radnici)
+				{
+					<tr>
+						<th scope="row">@radnik.Ime</th>
+						<td>@radnik.Prezime</td>
+						<td>@radnik.RazinaStrucneSpreme</td>
+
+						@if (@radnik.Certifikat == null)
+						{
+
+							<td>Nema</td>
+						}
+						else
+						{
+							<td>@radnik.Certifikat</td>
+						}
+						@if (@radnik.IstekCertifikata == null)
+						{
+
+							<td>Nema</td>
+						}
+						else
+						{
+							<td>@radnik.IstekCertifikata</td>
+						}
+
+						@if (radnik.Dezuran == 0)
+						{
+
+							<td>Ne</td>
+						}
+						else
+						{
+							<td>Da</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+</div>

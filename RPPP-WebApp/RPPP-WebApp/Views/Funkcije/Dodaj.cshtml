@@ -1,0 +1,33 @@
+﻿@model Funkcije
+
+<h2>Unos nove funkcije</h2>
+
+<form asp-action="Dodaj" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Naziv"></label>
+        <div><span asp-validation-for="Naziv" class="text-danger"></span></div>
+        <input asp-for="Naziv" class="form-control" />
+ 
+    </div>
+    <div class="form-group">
+        <label asp-for="IdPodsustav"></label>
+        <div><span asp-validation-for="IdPodsustav" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdPodsustav" asp-items="ViewBag.Podsustavi">
+            <option disabled selected value="">Odaberite podsustav</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Kategorija"></label>
+        <div><span asp-validation-for="Kategorija" class="text-danger"></span></div>
+        <input asp-for="Kategorija" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-default">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

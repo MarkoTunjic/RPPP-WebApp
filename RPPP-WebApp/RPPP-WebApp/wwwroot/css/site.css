@@ -1,0 +1,34 @@
+﻿main {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.logo-icon {
+    height: 30px;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #a94442;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border-color: red;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    line-height: 60px;
+}
+
+.paginator {
+    display: flex;
+    max-width: 30%;
+}

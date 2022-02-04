@@ -1,0 +1,182 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "RPPP02Context",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "RPPP_WebApp",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Funkcije]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Informacija]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IzbioKvar]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IzdajePrirucnik]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Kontrolor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[KrajSmjene]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Kriticnost]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Kvar]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Lokacija]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NadleznoTijelo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NadzirePodsustav]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NoviKvar]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Oprema]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlaniranZa]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlanOdrzavanja]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PodrucjeRada]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Podsustav]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PrimaInformaciju]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Prioritet]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Prirucnik]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Radnik]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RadniList]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RadniNalog]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Rang]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Smjena]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Stanje]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Status]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Stavka]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[StrucnaSprema]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sustav]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[system_logging]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TimZaOdrzavanje]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TipOpreme]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UnosiSeKvar]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Uredaj]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VoditeljSmjene]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VrstaSustava]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "desktop-p9e990k.RPPP02.dbo",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

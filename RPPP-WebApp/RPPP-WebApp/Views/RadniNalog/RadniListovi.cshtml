@@ -1,0 +1,78 @@
+﻿@model IEnumerable<RadniListViewModel>
+<table class="table table-striped" id="table-radnilistovi">
+    <thead>
+        <tr>
+            @{
+                string[] nazivi = { "Status", "Pocetak Rada", "Trajanje Rada", "Opis Rada", "NazivUredaja", "Tim za odrzavanje" };
+                for (int i = 0; i < nazivi.Length; i++)
+                {
+                    <th class="text-center">
+                        @nazivi[i]
+                    </th>
+                }
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var radniList in Model)
+        {
+            <tr>
+                <td class="text-left col-sm-4">
+                    <input type="hidden" name="RadniListovi.Index" value="@radniList.IdStatus" />
+                    <input type="hidden" name="RadniListovi[@radniList.IdStatus].Id" value="@radniList.Id" />
+                    <input type="hidden" name="RadniListovi[@radniList.IdStatus].IdUredaj" value="@radniList.IdUredaj" />
+                    <input type="hidden" name="RadniListovi[@radniList.IdStatus].IdTimZaOdrzavanje" value="@radniList.IdTimZaOdrzavanje" />
+                    <input type="hidden" name="RadniListovi[@radniList.IdStatus].IdStatus" value="@radniList.IdStatus" />
+                    <input type="hidden" name="RadniListovi[@radniList.IdStatus].Status" value="@radniList.Status" />
+                    @radniList.Status
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="RadniListovi[@radniList.IdStatus].PocetakRada" type="datetime" class="form-control" value="@radniList.PocetakRada" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="RadniListovi[@radniList.IdStatus].TrajanjeRada" class="form-control" type="number" value="@radniList.TrajanjeRada" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="RadniListovi[@radniList.IdStatus].OpisRada" class="form-control" type="text" value="@radniList.OpisRada" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="RadniListovi[@radniList.IdStatus].NazivUredaja" class="form-control" value="@radniList.NazivUredaja" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="RadniListovi[@radniList.IdStatus].TimZaOdrzavanje" class="form-control" value="@radniList.TimZaOdrzavanje" />
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-danger deleterow" title="Izbaci">Obrisi</button>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <input id="radnilist-idStatus" type="hidden" data-autocomplete-placeholder="Status" readonly="readonly" />
+                <input id="radnilist-status" type="text" data-autocomplete="Status" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="radnilist-pocetakrada" type="datetime" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="radnilist-trajanjerada" type="number" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="radnilist-opisrada" type="text" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="radnilist-idUredaj" type="hidden" data-autocomplete-placeholder="Uredaj" readonly="readonly" />
+                <input id="radnilist-nazivuredaja" type="text" data-autocomplete="Uredaj" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="radnilist-idTimZaOdrzavanje" type="hidden" data-autocomplete-placeholder="TimZaOdrzavanje" readonly="readonly" />
+                <input id="radnilist-timzaodrzavanje" type="text" data-autocomplete="TimZaOdrzavanje" />
+            </td>
+            <td class="text-left" colspan="3">
+                <button id="radnilist-dodaj" class="btn btn-sm btn-secondary" title="Dodaj">Dodaj</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

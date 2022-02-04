@@ -1,0 +1,85 @@
+﻿@model OpremaViewModel
+
+<p class="small">
+    Straničenje i sortiranje (server)
+</p>
+
+<a class="btn btn-warning"
+   asp-action="Index"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending">Povratak</a>
+<a class="btn btn-primary"
+   asp-action="Prethodni"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">Prethodni</a>
+<a class="btn btn-primary"
+   asp-action="Sljedeci"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">Sljedeći</a>
+
+<form>
+    <div class="form-group">
+        <label asp-for="Redundantnost"></label>
+        <input asp-for="Redundantnost" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Budzet"></label>
+        <input asp-for="Budzet" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="DatumPustanjaUPogon"></label>
+        <input asp-for="DatumPustanjaUPogon" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="TipOpreme"></label>
+        <input asp-for="TipOpreme" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="PodsustavNaziv"></label>
+        <input asp-for="PodsustavNaziv" class="form-control" readonly />
+    </div>
+</form>
+<div class="container col-sm-12 col-lg-8">
+    @if (Model != null)
+    {
+        <table class="table table-hover" id="uredajiTable">
+            <caption>Uređaji</caption>
+            <thead>
+                <tr>
+                    <th scope="col">
+                        Naziv
+                    </th>
+                    <th scope="col">
+                        Proizvođač
+                    </th>
+                    <th scope="col">
+                        Godina proizvodnje
+                    </th>
+                    <th scope="col">
+                        ID opreme
+                    </th>
+                    <th scope="col">
+                        Tip stanja
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UredajViewModel uredaj in Model.Uredaji)
+                {
+                    <tr>
+                        <th scope="row">@uredaj.Naziv</th>
+                        <td>@uredaj.Proizvodac</td>
+                        <td>@uredaj.GodinaProizvodnje</td>
+                        <td>@uredaj.IdOprema</td>
+                        <td>@uredaj.TipStanja</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

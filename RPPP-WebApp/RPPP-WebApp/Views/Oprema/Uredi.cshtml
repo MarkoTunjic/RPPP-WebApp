@@ -1,0 +1,83 @@
+﻿@model OpremaViewModel
+
+<h2>Uređivanje opreme</h2>
+<a class="btn btn-warning"
+   asp-action="Index"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending">Povratak</a>
+<a class="btn btn-primary" asp-action="Prethodni"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id"
+   asp-route-viewName="Uredi">Prethodni</a>
+<a class="btn btn-primary" asp-action="Sljedeci"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id"
+   asp-route-viewName="Uredi">Sljedeći</a>
+<div class="container">
+    <form asp-action="Uredi"
+          asp-route-page="@ViewBag.Page"
+          asp-route-sort="@ViewBag.Sort"
+          asp-route-ascending="@ViewBag.Ascending"
+          method="post" id="dokument_form">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="All" class="form-group row"></div>
+        <div class="form-group row">
+            <label asp-for="Redundantnost" class=" col-form-label"></label>
+            <div class="">
+                <input asp-for="Redundantnost" class="form-control" />
+            </div>
+            <label asp-for="Budzet" class="col-sm-1 col-form-label"></label>
+            <div class="">
+                <input asp-for="Budzet" class="form-control" />
+            </div>
+            <label asp-for="TipOpreme" class="col-form-label"></label>
+            <div class="">
+                <input asp-for="TipOpreme" readonly="readonly" class="form-control" data-autocomplete-placeholder="tipOpreme" />
+            </div>
+            <div class="">
+                <input class="form-control" data-autocomplete="tipOpreme" asp-for="@Model.TipOpreme" />
+            </div>
+            <label asp-for="DatumPustanjaUPogon" class=" col-form-label"></label>
+            <div class="">
+                <input asp-for="DatumPustanjaUPogon" class="form-control" />
+            </div>
+            <label asp-for="PodsustavNaziv" class="col-sm-1 col-form-label"></label>
+            <div class="">
+                <input asp-for="PodsustavNaziv" class="form-control" />
+            </div>
+            <div class="">
+                <button id="save" type="submit" class="btn btn-sm btn-primary" title="Spremi">Spremi</button>
+                <a class="btn btn-sm btn-primary cancel"
+                   asp-action="Uredi"
+                   asp-route-id="@Model.Id"
+                   asp-route-page="@ViewBag.Page"
+                   asp-route-sort="@ViewBag.Sort"
+                   asp-route-ascending="@ViewBag.Ascending"
+                   title="Osvježi">
+                    Osvježi</i>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <partial name="Uredaji" model="Model.Uredaji" />
+        </div>
+    </form>
+</div>
+
+<partial name="NoviUredajTemplate" />
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+    <partial name="IncludeValidation" />
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/autocomplete.js" asp-append-version="true"></script>
+    <script src="~/js/OpremaList.js" asp-append-version="true"></script>
+}

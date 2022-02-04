@@ -1,0 +1,29 @@
+﻿<table id="template" style="visibility:hidden">
+    <tr>
+        <td class="text-left col-sm-4">
+            <input type="hidden" name="RadniListovi.Index" value="--idStatus--" />
+            <input type="hidden" name="RadniListovi[--idStatus--].IdUredaj" value="--idUredaj--" />
+            <input type="hidden" name="RadniListovi[--idStatus--].IdStatus" value="--idStatus--" />
+            <input type="hidden" name="RadniListovi[--idStatus--].IdTimZaOdrzavanje" value="--idTimZaOdrzavanje--" />
+            <input type="text" name="RadniListovi[--idStatus--].Status" value="--status--" />
+        </td>
+        <td class="text-center col-sm-1">
+            <input name="RadniListovi[--idStatus--].PocetakRada" type="datetime" class="form-control" value="--pocetak--" />
+        </td>
+        <td class="text-center col-sm-1">
+            <input name="RadniListovi[--idStatus--].TrajanjeRada" type="number" class="form-control" value="--trajanje--" />
+        </td>
+        <td class="text-center col-sm-1">
+            <input name="RadniListovi[--idStatus--].OpisRada" type="text" class="form-control" value="--opis--" />
+        </td>
+        <td class="text-center col-sm-1">
+            <input name="RadniListovi[--idStatus--].NazivUredaja" class="form-control" type="datetime" value="--uredaj--" />
+        </td>
+        <td class="text-center col-sm-1">
+            <input name="RadniListovi[--idStatus--].TimZaOdrzavanje" class="form-control" value="--tim--" />
+        </td>
+        <td>
+            <button class="btn btn-sm btn-danger deleterow" title="Izbaci">Obrisi</button>
+        </td>
+    </tr>
+</table>

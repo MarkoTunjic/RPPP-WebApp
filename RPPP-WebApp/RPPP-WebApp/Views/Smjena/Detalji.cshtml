@@ -1,0 +1,93 @@
+﻿@model SmjenaViewModel
+<a class="btn btn-warning"
+   asp-action="Index"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending">Povratak</a>
+<a class="btn btn-primary" asp-action="Prethodni"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">prethodni</a>
+<a class="btn btn-primary" asp-action="Sljedeci"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">sljedeći</a>
+
+<form>
+	<div class="form-group">
+		<label asp-for="PocetakSmjene"></label>
+		<input asp-for="PocetakSmjene" class="form-control" readonly />
+	</div>
+	<div class="form-group">
+		<label asp-for="PlatniFaktor"></label>
+		<input asp-for="PlatniFaktor" class="form-control" readonly />
+	</div>
+	<div class="form-group">
+		<label asp-for="VrijemeKrajaSmjene"></label>
+		<input asp-for="VrijemeKrajaSmjene" class="form-control" readonly />
+	</div>
+</form>
+
+<div class="container col-sm-12 col-lg-8">
+	<table class="table table-hover" id="planTable">
+		<caption>Kontrolori</caption>
+		<thead>
+			<tr>
+				<th scope="col">
+					Ime
+				</th>
+				<th scope="col">
+					Prezime
+				</th>
+				<th scope="col">
+					Oib
+				</th>
+				<th scope="col">
+					Datum zaposlenja
+				</th>
+				<th scope="col">
+					Zaposlen do
+				</th>
+				<th scope="col">
+					Lozinka
+				</th>
+				
+				<th scope="col">
+					Korisničko ime
+				</th>
+				<th scope="col">
+                	Naziv ranga kontrolora
+                </th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (KontrolorViewModel kontrolor in Model.Kontrolori)
+			{
+				<tr>
+					<th scope="row">@kontrolor.Ime</th>
+					<td>@kontrolor.Prezime</td>
+					<td>@kontrolor.Oib</td>
+					<td>@kontrolor.DatumZaposlenja</td>
+
+					@if (@kontrolor.ZaposlenDo == null)
+					{
+						<td>Stalno zaposlenje</td>
+					}
+					else
+					{
+						<td>@kontrolor.ZaposlenDo</td>
+					}
+					@if (@kontrolor.Lozinka != null)
+					{
+						<td>********</td>
+					}
+					<td>@kontrolor.KorisnickoIme</td>
+					<td>@kontrolor.ImeRanga</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

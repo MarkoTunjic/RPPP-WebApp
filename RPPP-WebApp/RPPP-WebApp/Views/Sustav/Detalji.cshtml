@@ -1,0 +1,71 @@
+﻿@model SustavViewModel
+<a class="btn btn-warning"
+   asp-action="Index"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending">Povratak</a>
+<a class="btn btn-primary" asp-action="Prethodni"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">prethodni</a>
+<a class="btn btn-primary" asp-action="Sljedeci"
+   asp-route-page="@ViewBag.Page"
+   asp-route-sort="@ViewBag.Sort"
+   asp-route-ascending="@ViewBag.Ascending"
+   asp-route-id="@Model.Id">sljedeći</a>
+
+<form>
+    <div class="form-group">
+        <label asp-for="Opis"></label>
+        <input asp-for="Opis" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Osjetljivost"></label>
+        <input asp-for="Osjetljivost" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="StupanjKriticnosti"></label>
+        <input asp-for="StupanjKriticnosti" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="VrstaSustava"></label>
+        <input asp-for="VrstaSustava" class="form-control" readonly />
+    </div>
+</form>
+
+<div class="container col-sm-12 col-lg-8">
+    <table class="table table-hover" id="planTable">
+        <caption>Podsustavi</caption>
+        <thead>
+            <tr>
+                @{
+                    string[] atributi = { "Naziv", "Opis", "Osjetljivost", "Lokacija", "Stupanj kritičnosti", "Učestalost održavanja" };
+                    for (int i = 0; i < atributi.Length; i++)
+                    {
+                        <th scope="col">
+                            
+                                @atributi[i]
+                            
+                        </th>
+                    }
+                }
+                
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PodsustavViewModel podsustav in Model.Podsustavi)
+            {
+            <tr>
+                <th scope="row">@podsustav.Naziv</th>
+                <td>@podsustav.Opis</td>
+                <td>@podsustav.Osjetljivost</td>
+                <td>@podsustav.NazivLokacije</td>
+                <td>@podsustav.StupanjKriticnosti</td>
+                <td>@podsustav.UcestalostOdrzavanja</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

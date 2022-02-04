@@ -1,0 +1,67 @@
+﻿<h1>Dohvati status</h1>
+<input type="hidden" id="controller" value="KriticnostJ" />
+<input type="hidden" id="naziv" value="StupanjKriticnosti" />
+<small>Odrađeno: CRUD servisi za REST API za JTP kriticnost rada. Slanje upita se vrši koristeci ajax (jQuery) i rezultati se upisuju u text area</small>
+<div class="form-group">
+    <label for="start">pocetni index</label>
+    <input class="form-control" type="number" id="start" placeholder="Unesite pocetni index" />
+    <label for="size">broj podataka koje zelite</label>
+    <input class="form-control" type="number" id="size" placeholder="Unesite broj podataka koje zelite" />
+    <label for="sort">attribut za sortiranje (Id,StupanjKriticnosti)</label>
+    <input class="form-control" type="text" id="sort" placeholder="Unesite attribut za sortiranje (Id,StupanjKriticnosti)" />
+    <input type="button" id="DohvatiKriticnosti" value="dohvati" />
+    <label class="form-control" for="kriticnosti">Rezultat:</label>
+    <textarea class="form-control" id="kriticnosti"></textarea>
+</div>
+
+<h1>Dohvati kritičnost po id-u</h1>
+<div class="form-group">
+    <label for="id">Id koji zelite dohvatiti</label>
+    <input class="form-control" type="number" id="id" placeholder="Unesite id" />
+    <input type="button" id="DohvatiKriticnost" value="dohvati" />
+    <label class="form-control" for="kriticnost">Rezultat:</label>
+    <textarea class="form-control" id="kriticnost"></textarea>
+</div>
+
+<h1>Dohvati kritičnost koja sadrže string</h1>
+<div class="form-group">
+    <label for="filter">String za filter</label>
+    <input class="form-control" type="text" id="filter" placeholder="Unesite string filter" />
+    <input type="button" id="dohvatiFiltrirano" value="dohvati" />
+    <label class="form-control" for="broj">Rezultat:</label>
+    <textarea class="form-control" id="broj"></textarea>
+</div>
+
+<h1>Brisanje kritičnosti po id-u</h1>
+<div class="form-group">
+    <label for="brisanje">Id za brisanje</label>
+    <input class="form-control" type="number" id="brisanje" placeholder="Unesite id za brisanje" />
+    <input type="button" id="ObrisiKriticnost" value="obrisi" />
+    <label class="form-control" for="obrisano">Rezultat:</label>
+    <textarea class="form-control" id="obrisano"></textarea>
+</div>
+
+<h1>Uredivanje kritičnosti po id-u</h1>
+<small>Prvo unesite id i pojavit ce se trenutni naziv koji mozete urediti. Ako se ne pojavi probajte kliknuti sa strane</small>
+<form id="uredivanje">
+    <label for="urediId">Id statusa koje zelite urediti</label>
+    <input class="form-control" id="urediId" name="Id" type="number" placeholder="Unesite Id statusa koje zelite urediti" />
+    <label for="naziv">Naziv statusa</label>
+    <input class="form-control" id="noviNaziv" name="StupanjKriticnosti" type="text" placeholder="Unesite naziv" />
+    <input type="button" id="uredi" value="uredi" />
+    <label class="form-control" for="uredeno">Rezultat:</label>
+    <textarea class="form-control" id="uredeno"></textarea>
+</form>
+
+<h1>Nova kritičnost</h1>
+<form id="dodavanje">
+    <label for="naziv">Naziv nove kritičnosti</label>
+    <input class="form-control" name="StupanjKriticnosti" id="naziv" type="text" placeholder="Unesite naziv" />
+    <input type="button" id="dodaj" value="dodaj" />
+    <label class="form-control" for="dodano">Rezultat:</label>
+    <textarea class="form-control" id="dodano"></textarea>
+</form>
+@section scripts{
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/Crud.js" asp-append-version="true"></script>
+}

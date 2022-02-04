@@ -1,0 +1,64 @@
+﻿@model Kontrolor
+
+<h2>Unos novog kontrolora</h2>
+
+<form asp-action="Dodaj" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Ime"></label>
+        <div><span asp-validation-for="Ime" class="text-danger"></span></div>
+        <input type="text" asp-for="Ime" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Prezime"></label>
+        <div><span asp-validation-for="Prezime" class="text-danger"></span></div>
+        <input type="text" asp-for="Prezime" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Oib"></label>
+        <div><span asp-validation-for="Oib" class="text-danger"></span></div>
+        <input type="text" asp-for="Oib" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DatumZaposlenja"></label>
+        <div><span asp-validation-for="DatumZaposlenja" class="text-danger"></span></div>
+        <input type="date" asp-for="DatumZaposlenja" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ZaposlenDo"></label>
+        <div><span asp-validation-for="ZaposlenDo" class="text-danger"></span></div>
+        <input type="date" asp-for="ZaposlenDo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="KorisnickoIme"></label>
+        <div><span asp-validation-for="KorisnickoIme" class="text-danger"></span></div>
+        <input type="text" asp-for="KorisnickoIme" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Lozinka"></label>
+        <div><span asp-validation-for="Lozinka" class="text-danger"></span></div>
+        <input type="text" asp-for="Lozinka" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IdSmjena"></label>
+        <div><span asp-validation-for="IdSmjena" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdSmjena" asp-items="ViewBag.Smjene">
+            <option disabled selected value="">Odaberite smjenu</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdRang"></label>
+        <div><span asp-validation-for="IdRang" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdRang" asp-items="ViewBag.Rangovi">
+            <option disabled selected value="">Odaberite rang kontrolora</option>
+        </select>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-default">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

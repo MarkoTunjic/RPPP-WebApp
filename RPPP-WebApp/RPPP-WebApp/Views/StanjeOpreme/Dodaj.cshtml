@@ -1,0 +1,24 @@
+@model Stanje
+    <p class="small">
+        Validacija, dodavanje
+    </p>
+
+    <h2>Unos novog stanja opreme</h2>
+
+
+    <form asp-action="Dodaj" method="post">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="TipStanja"></label>
+            <div><span asp-validation-for="TipStanja" class="text-danger"></span></div>
+            <input asp-for="TipStanja" class="form-control" />
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Dodaj</button>
+            <a asp-action="Index" class="btn btn-default">Odustani</a>
+        </div>
+    </form>
+
+    @section scripts {
+        <partial name="IncludeValidation" />
+    }

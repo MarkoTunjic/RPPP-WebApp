@@ -1,0 +1,172 @@
+﻿@model RadniNaloziViewModel
+
+<div class="container mt-3">
+    <div class="jumbotron">
+        <h1>Radni nalog</h1>
+        <p>
+            Na ovoj stranici je moguće pregledati, urediti, obrisati i <a asp-action="Dodaj">dodati</a> radne naloge i pripadajuće radne listove
+        </p>
+        <small>(sortiranje i straničenje na serveru, obrada iznimki,validacija, tablicni master detail, pojedinacni master detail)</small>
+    </div>
+</div>
+
+<div class="container col-sm-12 col-lg-8">
+    @if (Model != null)
+
+    {
+        <table class="table table-hover" id="planTable">
+            <caption>Radni nalog</caption>
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+                            Opis kvara
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+                            Lokacija
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                            Status
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">
+                            Stupanj prioriteta
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending : true)">
+                            Početak rada
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending : true)">
+                            Radni listovi
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="7" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 7 ? !Model.PagingInfo.Ascending : true)">
+                            SLA
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="8" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 8 ? !Model.PagingInfo.Ascending : true)">
+                            Tip rada
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="9" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 9 ? !Model.PagingInfo.Ascending : true)">
+                            Trag kvara
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a asp-route-sort="10" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 10 ? !Model.PagingInfo.Ascending : true)">
+                            Trajanje
+                        </a>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (RadniNalogViewModel radniNalog in @Model.RadniNalozi)
+                {
+                    <tr>
+                        <th scope="row">@radniNalog.Kvar</th>
+                        <td>@radniNalog.Lokacija</td>
+                        <td>@radniNalog.Status</td>
+                        <td>@radniNalog.StupanjPrioriteta</td>
+                        <td>@radniNalog.PocetakRada</td>
+                        <td>
+                            @{
+                                int counter;
+                                int max = radniNalog.RadniListovi.Count < 3 ? radniNalog.RadniListovi.Count : 3;
+                                for (counter = 0; counter < max; counter++)
+                                {
+                                    if (counter < radniNalog.RadniListovi.Count - 1)
+                                    {
+                                        <span>@radniNalog.RadniListovi.ElementAt(counter).OpisRada,</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@radniNalog.RadniListovi.ElementAt(counter).OpisRada </span>
+                                    }
+                                }
+                                if (radniNalog.RadniListovi.Count > 2)
+                                {
+                                    <span>...</span>
+                                }
+                            }
+                        </td>
+                        <td>@radniNalog.Sla</td>
+                        <td>@radniNalog.TipRada</td>
+                        <td>@radniNalog.TragKvara</td>
+                        <td>@radniNalog.Trajanje</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a class="btn btn-primary btn-sm mr-2" role="button"
+                                   asp-action="Detalji"
+                                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                                   asp-route-sort="@Model.PagingInfo.Sort"
+                                   asp-route-ascending="@Model.PagingInfo.Ascending"
+                                   asp-route-id="@radniNalog.Id">
+                                    Detalji
+                                </a>
+                                <a class="btn btn-warning btn-sm mr-2" role="button"
+                                   asp-action="Uredi"
+                                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                                   asp-route-sort="@Model.PagingInfo.Sort"
+                                   asp-route-ascending="@Model.PagingInfo.Ascending"
+                                   asp-route-id="@radniNalog.Id">
+                                    Uredi
+                                </a>
+                                <form asp-action="Obrisi" method="post"
+                                      asp-route-page="@Model.PagingInfo.CurrentPage"
+                                      asp-route-sort="@Model.PagingInfo.Sort"
+                                      asp-route-ascending="@Model.PagingInfo.Ascending">
+                                    <input type="hidden" name="Id" value="@radniNalog.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">Obriši</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="btn-group paginator" role="group" aria-label="Basic example">
+            @{
+                int usedLeft = Model.PagingInfo.CurrentPage - Model.PagingInfo.PageOffset > 0 ? Model.PagingInfo.PageOffset : Model.PagingInfo.CurrentPage - 1;
+                int usedRight = Model.PagingInfo.PageOffset + Model.PagingInfo.CurrentPage < Model.PagingInfo.TotalPages ? Model.PagingInfo.PageOffset : Model.PagingInfo.TotalPages - Model.PagingInfo.CurrentPage;
+
+                int start = Model.PagingInfo.CurrentPage - usedLeft - (Model.PagingInfo.PageOffset - usedRight);
+                int end = Model.PagingInfo.CurrentPage + usedRight + (Model.PagingInfo.PageOffset - usedLeft);
+                end = end > Model.PagingInfo.TotalPages ? Model.PagingInfo.TotalPages : end;
+                start = start < 1 ? 1 : start;
+                if (start >= 2)
+                {
+                    <a class="btn btn-outline-success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="1" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">1</a>
+                    @if (start > 2)
+                    {
+                        <a class="btn btn-outline-success btn-sm pager disabled" role="button">...</a>
+                    }
+                }
+            }
+            @for (int currentPage = start; currentPage <= end; currentPage++)
+            {
+                <a class="btn btn-@(currentPage == Model.PagingInfo.CurrentPage ? "": "outline-")success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="@currentPage" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">@currentPage</a>
+            }
+            @if (end <= Model.PagingInfo.TotalPages - 1)
+            {
+                @if (end < Model.PagingInfo.TotalPages - 1)
+                {
+                    <a class="btn btn-outline-success btn-sm pager disabled" role="button">...</a>
+                }
+                <a class="btn btn-outline-success btn-sm pager" asp-route-sort="@(Model.PagingInfo.Sort)" asp-route-page="@Model.PagingInfo.TotalPages" asp-route-ascending="@(Model.PagingInfo.Ascending)" role="button">@Model.PagingInfo.TotalPages</a>
+            }
+        </div>
+    }
+</div>
+

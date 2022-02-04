@@ -1,0 +1,27 @@
+﻿<small>Odradeno: izvoz dva JTP u excel, izvoz master detail u excel, uvoz 2 JTP-a u formatu kao i export, Izvoz master detail u PDF</small>
+<ul>
+	<li>
+		<a target="_blank" asp-action="Smjene">Popis svih smjena i njihovih kontrolora</a>
+	</li>
+	<li>
+		<a target="_blank" asp-action="KontroloriExcel">Popis svih kontrolora i krajeva smjena u xlsx</a>
+	</li>
+	<li>
+		<a target="_blank" asp-action="SmjeneExcel">Popis svih smjena u xlsx</a>
+	</li>
+</ul>
+<div id="upload row">
+	<form class="form-inline" asp-action="ImportExcel" method="post" enctype="multipart/form-data">
+		<div class="row">
+			<div class="form-group col-xs-6 col-md-3 ">
+				<label for="importFile">Uvoz podataka u excel formatu za kontrolore i krajeve smjena</label>
+				<input type="file" class="form-control" id="importFile" name="importFile" data-save="">
+			</div>
+			<div class="form-group">
+				<label for="submit"></label>
+				<input type="submit" id="submit" value="Uvezi">
+			</div>
+		</div>
+	</form>
+</div>
+
